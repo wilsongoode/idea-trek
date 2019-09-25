@@ -37,8 +37,8 @@ exports = module.exports = function(app) {
 	app.get("/", routes.views.index);
 	app.get("/blog/:category?", routes.views.blog);
 	app.get("/blog/post/:post", routes.views.post);
-	// app.get("/ideas/:tag?", routes.views.ideas_list);
-	app.get("/ideas/idea/:idea", routes.views.idea);
+	app.get("/ideas/:stage?", routes.views.ideas_list); // TODO: this breaks with "object Undefined"
+	app.get("/ideas/idea/:ideaSlug", routes.views.idea);
 	app.all("/contact", routes.views.contact);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

@@ -13,11 +13,11 @@ block content
 					h5 Posted 
 						if data.idea.publishedDate
 							| on #{data.idea._.publishedDate.format('MMMM Do, YYYY')} 
-						if data.idea.categories && data.idea.categories.length
+						if data.idea.tags && data.idea.tags.length
 							| in 
-							each cat, cat_i in data.idea.categories
-								a(href='/idea/' + cat.key)= cat.name
-								if cat_i < data.idea.categories.length - 1
+							each tag, tag_i in data.idea.tags
+								a(href='/idea/' + tag.key)= tag.name
+								if tag_i < data.idea.tags.length - 1
 									| , 
 								else
 									|  

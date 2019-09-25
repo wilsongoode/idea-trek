@@ -1,16 +1,16 @@
 extends ../layouts/default
 
 mixin idea(idea)
-	.idea(data-ks-editable=editable(user, { list: 'Post', id: idea.id }))
+	.idea(data-ks-editable=editable(user, { list: 'Idea', id: idea.id }))
 		h2: a(href='/ideas/idea/' + idea.slug)= idea.title
 		p.lead.text-muted Posted 
 			if idea.publishedDate
 				| on #{idea._.publishedDate.format('MMMM Do, YYYY')} 
-			if idea.categories && idea.categories.length
+			if idea.stage && idea.stage.length
 				| in 
-				each cat, i in idea.categories
-					a(href='/blog/' + cat.key)= cat.name
-					if i < idea.categories.length - 1
+				each stage, i in idea.stage
+					a(href='/ideas/' + stage.key)= stage.name
+					if i < idea.stage.length - 1
 						| , 
 					else
 						|  
@@ -24,14 +24,20 @@ mixin idea(idea)
 
 block intro
 	.container
-		h1= data.tag ? data.tag.name : 'All Ideas'
+		h1= data.stage ? data.stage.name : 'All Ideas'
 
 block content
 	.container: .row
 		.col-sm-8.col-md-9
-			if filters.tag && !data.tag
-				h3.text-muted Invalid Tag.
+			-console.log(filters.stage)
+			-console.log(data)
+			if filters.stage && !data.stages
+				h3.text-muted Invalid Stage.
 			else
+				-console.log(data.ideas)
+				-console.log(38)
+				-console.log(data.ideas.results)
+				-console.log(40)
 				if data.ideas.results.length
 					if data.ideas.totalPages > 1
 						h4.text-weight-normal Showing 
@@ -42,11 +48,11 @@ block content
 							strong #{data.ideas.total}
 							|  ideas.
 					else
-						h4.text-weight-normal Showing #{utils.plural(data.ideas.results.length, '* post')}.
+						h4.text-weight-normal Showing #{utils.plural(data.ideas.results.length, '* idea')}.
 					.blog
-						each post in data.ideas.results
-							+post(post)
-					
+						each idea in data.ideas.results
+							+idea(idea)
+
 					if data.ideas.totalPages > 1
 						ul.pagination
 							if data.ideas.previous
@@ -65,11 +71,11 @@ block content
 						h3.text-muted There are no ideas in the category #{data.category.name}.
 					else
 						h3.text-muted There are no ideas yet.
-		
-		if data.categories.length
+
+		if data.stages.length
 			.col-sm-4.col-md-3
-				h2 Categories
+				h2 Stages
 				.list-group(style='margin-top: 70px;')
-					a(href='/blog', class=!data.category ? 'active' : false).list-group-item All Categories
-					each cat in data.categories
-						a(href='/blog/' + cat.key, class=data.category && data.category.id == cat.id ? 'active' : false).list-group-item= cat.name
+					a(href='/ideas', class=!data.stage ? 'active' : false).list-group-item All Stages
+					each stage in data.stages
+						a(href='/ideas/' + stage.key, class=data.stage && data.stage.id == stage.id ? 'active' : false).list-group-item= stage.name

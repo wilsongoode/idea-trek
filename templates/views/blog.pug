@@ -32,6 +32,7 @@ block content
 			if filters.category && !data.category
 				h3.text-muted Invalid Category.
 			else
+				-console.log(data.posts.results)
 				if data.posts.results.length
 					if data.posts.totalPages > 1
 						h4.text-weight-normal Showing 
