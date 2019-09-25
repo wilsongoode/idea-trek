@@ -69,6 +69,9 @@ exports = module.exports = function (req, res) {
 			.populate('author categories');
 
 		if (locals.data.category) {
+			console.log("blog", 72);
+			console.log(locals.data.category);
+			
 			q.where('categories').in([locals.data.category]);
 		}
 
