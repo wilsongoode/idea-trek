@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    title= "Submit an Idea"
+  body
+    if enquirySubmitted
+      h3 Your Idea has been added to the database
+    else
+      .container
+        .row: .col-sm-8.col-md-6
+          form(method='post' action="/api/idea")
+            input(type='hidden', name='action')
+            .form-group
+              label Give your idea a title
+              input(type='text', name='title')
+            .form-group
+              label Describe your idea
+              textarea(name='description', placeholder='event description...' rows=4)
+            .form-group
+              label Does your idea have funding?
+              textarea(name='fundingStatus', placeholder='event description...' rows=4)
+            .form-group
+              label What problem are you trying to solve?
+              textarea(name='problem', placeholder='event description...' rows=4)
+            .form-group
+              label How might this idea solve it?
+              textarea(name='howSolve', placeholder='event description...' rows=4)
+            .form-group
+              label Who would benefit from this idea? Who are your stakeholders?
+              textarea(name='stakeholders', placeholder='event description...' rows=4)
+            .form-group
+              label What are some potential barriers to addressing the problem or opportunity?
+              textarea(name='barriers', placeholder='event description...' rows=4)
+            .form-actions
+              button(type='submit').btn.btn-primary Send

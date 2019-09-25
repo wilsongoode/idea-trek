@@ -27,7 +27,6 @@ Idea.add({
 		howSolve: { type: Types.Html, wysiwyg: true, height: 150 },
 		stakeholders: { type: Types.Html, wysiwyg: true, height: 150 },
 		barriers: { type: Types.Html, wysiwyg: true, height: 150 },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 },
     },
     tags: { type: Types.Relationship, ref: 'Tag', many: true },
     stage: { type: Types.Relationship, ref: 'IdeaStage', default: 'Intake', many: false }

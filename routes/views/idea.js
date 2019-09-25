@@ -20,7 +20,7 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Idea').model.findOne({
 			// state: 'published',
 			slug: locals.filters.idea,
-		}).populate('author stage');
+		}).populate('author stage tag');
 
 		q.exec(function (err, result) {
             console.log(result);

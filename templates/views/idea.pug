@@ -8,6 +8,8 @@ block content
 			if !data.idea
 				h2 Invalid Post.
 			else
+			-console.log(10000001)
+			-console.log(data.idea)
 				header
 					h1= data.idea.title
 					h5 Posted 
@@ -22,8 +24,19 @@ block content
 								else
 									|  
 						if data.idea.author
-							| by #{data.idea.author.name.first}
+							| by #{data.idea.author.name.first} #{data.idea.author.name.last}
 				.idea
 					if data.idea.image.exists
 						.image-wrap: img(src=data.idea._.image.fit(750,450)).img-responsive
-					!= data.idea.content.full
+					h5: strong Description
+					!= data.idea.content.description
+					h5: strong Does your idea have funding?
+					!= data.idea.content.fundingStatus
+					h5: strong What problem are you trying to solve?
+					!= data.idea.content.problem
+					h5: strong How might this idea solve it?
+					!= data.idea.content.howSolve
+					h5: strong Who would benefit from this idea? Who are your stakeholders?
+					!= data.idea.content.stakeholders
+					h5: strong What are some potential barriers to addressing the problem or opportunity?
+					!= data.idea.content.barriers

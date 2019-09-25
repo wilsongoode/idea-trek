@@ -10,8 +10,8 @@ var keystone = require('keystone');
 // and documentation.
 
 keystone.init({
-	'name': 'Idea Trek Keystone Test',
-	'brand': 'Idea Trek Keystone Test',
+	'name': 'Idea Trek - Davidson College',
+	'brand': 'Idea Trek Admin Portal',
 
 	'less': 'public',
 	'static': 'public',

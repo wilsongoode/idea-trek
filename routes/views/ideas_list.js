@@ -68,7 +68,7 @@ exports = module.exports = function (req, res) {
 			},
 		})
 			.sort('-publishedDate')
-			.populate('author stage');
+			.populate('author stage tags');
 
 		if (locals.data.stage) {
 			console.log("idea list", 74);
