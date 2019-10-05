@@ -29,7 +29,8 @@ Idea.add({
 		barriers: { type: Types.Html, wysiwyg: true, height: 150 },
     },
     tags: { type: Types.Relationship, ref: 'Tag', many: true },
-    stage: { type: Types.Relationship, ref: 'IdeaStage', default: 'Intake', many: false }
+	stage: { type: Types.Relationship, ref: 'IdeaStage', default: 'Intake', many: false },
+	comments: { type: Types.Relationship, ref: 'Comment', many: true }
 });
 
 Idea.schema.virtual('content.full').get(function () {

@@ -1,34 +1,49 @@
-var keystone = require('keystone');
+var keystone = require("keystone");
 
-exports = module.exports = function (req, res) {
-
+exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
 	// Set locals
-	locals.section = 'ideas';
+	locals.section = "ideas";
 	locals.filters = {
-		idea: req.params.ideaSlug,
+		idea: req.params.ideaSlug
 	};
 	locals.data = {
-        idea: []
+		idea: [],
+		// comments: []
 	};
 
 	// Load the current post
-	view.on('init', function (next) {
+	view.on("init", function(next) {
+		var q1 = keystone
+			.list("Idea")
+			.model.findOne({
+				// state: 'published',
+				slug: locals.filters.idea
+			})
+			.populate("author")
+			.populate({ path: 'comments', populate: { path: 'author' }});
 
-		var q = keystone.list('Idea').model.findOne({
-			// state: 'published',
-			slug: locals.filters.idea,
-		}).populate('author stage tag');
+		q1.exec(function(err, result) {
+			// console.log(result);
 
-		q.exec(function (err, result) {
-            console.log(result);
-            
 			locals.data.idea = result;
 			next(err);
 		});
 
+		// var q2 = keystone
+		// 	.list("Comment")
+		// 	.model.find({ idea: locals.filters.idea })
+		// 	.sort("-createdAt")
+		// 	.populate("author");
+
+		// q2.exec(function(err, result) {
+		// 	// console.log(result);
+
+		// 	locals.data.comments = result;
+		// 	next(err);
+		// });
 	});
 
 	// Load other posts
@@ -44,5 +59,5 @@ exports = module.exports = function (req, res) {
 	// });
 
 	// Render the view
-	view.render('idea');
+	view.render("idea");
 };

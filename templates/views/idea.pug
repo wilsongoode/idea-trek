@@ -40,3 +40,15 @@ block content
 					!= data.idea.content.stakeholders
 					h5: strong What are some potential barriers to addressing the problem or opportunity?
 					!= data.idea.content.barriers
+					hr
+					if !data.idea.comments.length > 0
+						h5 No comments yet!
+					else
+						h5: strong These are the comments:
+						-console.log(data.idea.comments)
+						//- != data.idea.comments
+						
+						each comment, comment_i in data.idea.comments
+							hr
+							!= `by ${comment.author.name.first} ${comment.author.name.last}`
+							!= comment.message
